@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 
-const CharacterInfo = () => {
+const ProductInfo = () => {
+    const [product, setProduct]= useState({})
 
     const { productId } = useParams();
 
@@ -12,15 +13,19 @@ const CharacterInfo = () => {
             const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
             const data = await response.json();
 
-            console.log(data)
+            setProduct(data)
         }
         fetchData()
 
     }, [productId])
 
     return (
-        <h1>{ productId }</h1>
+        <>
+            <h1>{ product.title }</h1>
+            <h4>£{ product.price }</h4>
+            <p>{ product.description }</p>
+        </>
     )
 }
 
-export default CharacterInfo;
+export default ProductInfo;

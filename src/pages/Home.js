@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ allProducts }) => {
 
     return (
         <>
             <h1>Home Page</h1>
-            <Link to="/4">Get product 4</Link>
+            {allProducts.map((product, index) => {
+                return(
+                    <div key={index}>
+                        <h3>{product.title}</h3>
+                        <Link to={`/product/${product.id}`}>More Info</Link>
+                    </div>
+                )
+            })}
         </>
     )
 }
